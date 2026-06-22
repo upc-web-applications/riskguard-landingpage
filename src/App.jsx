@@ -77,19 +77,20 @@ function Navbar() {
           ))}
         </div>
 
-        <button style={{
+       <a href="https://riskguard-a146d.web.app/login" style={{
           background: 'var(--accent)', color: '#fff',
           border: 'none', borderRadius: 6,
           padding: '0.55rem 1.4rem', fontFamily: 'var(--font-display)',
           fontWeight: 600, fontSize: '0.88rem', cursor: 'pointer',
-          letterSpacing: '0.02em',
+          letterSpacing: '0.02em', textDecoration: 'none',
+          display: 'inline-block',
           transition: 'all 0.2s',
         }}
           onMouseEnter={e => { e.target.style.background = 'var(--accent-2)'; e.target.style.transform = 'translateY(-1px)' }}
           onMouseLeave={e => { e.target.style.background = 'var(--accent)'; e.target.style.transform = 'translateY(0)' }}
         >
-          Contactar
-        </button>
+          Iniciar sesión
+        </a>
       </div>
     </nav>
   )
@@ -174,19 +175,20 @@ function Hero() {
           </p>
 
           <div className="animate-fade-up delay-300" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-            <button style={{
+           <a href="https://riskguard-a146d.web.app/login" style={{
               background: 'var(--accent)', color: '#fff', border: 'none',
               borderRadius: 8, padding: '0.85rem 2rem',
               fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.95rem',
               cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8,
               boxShadow: '0 8px 32px rgba(232,70,10,0.35)',
+              textDecoration: 'none',
               transition: 'all 0.2s',
             }}
               onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(232,70,10,0.5)' }}
               onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(232,70,10,0.35)' }}
             >
-              Contactar  <ArrowRight size={17} />
-            </button>
+              Iniciar sesión  <ArrowRight size={17} />
+            </a>
             <button style={{
               background: 'transparent', color: '#fff',
               border: '1px solid rgba(255,255,255,0.2)',
