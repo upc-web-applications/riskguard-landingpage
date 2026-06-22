@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
+import captura1 from '../assets/captura1.png'
+import captura2 from '../assets/captura2.png'
 import {
   Shield, Bell, FileText, ChevronRight, Menu, X,
   AlertTriangle, BarChart3, Users, ArrowRight,
@@ -599,8 +601,8 @@ function HowItWorks() {
           </h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 28 }}>
             {[
-              { img: '/assets/captura1.png', title: 'Panel de monitoreo en tiempo real' },
-              { img: '/assets/captura2.png', title: 'Registro de inspecciones y activos' },
+                { img: captura1, title: 'Panel de monitoreo en tiempo real' },
+                { img: captura2, title: 'Registro de inspecciones y activos' },
             ].map(s => (
               <div key={s.title} style={{
                 background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
