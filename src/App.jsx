@@ -63,17 +63,22 @@ function Navbar() {
         </div>
 
         {/* Desktop links */}
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}
+       <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}
           className="nav-links-desktop">
-          {['Características', 'Cómo funciona', 'Segmentos', 'Estadísticas'].map(l => (
-            <a key={l} href="#" style={{
+          {[
+            { label: 'Características', id: 'caracteristicas' },
+            { label: 'Cómo funciona', id: 'como-funciona' },
+            { label: 'Segmentos', id: 'segmentos' },
+            { label: 'Estadísticas', id: 'estadisticas' },
+          ].map(l => (
+            <a key={l.id} href={`#${l.id}`} style={{
               color: 'rgba(255,255,255,0.7)', textDecoration: 'none',
               fontFamily: 'var(--font-body)', fontWeight: 400, fontSize: '0.9rem',
               transition: 'color 0.2s',
             }}
               onMouseEnter={e => e.target.style.color = '#fff'}
               onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.7)'}
-            >{l}</a>
+            >{l.label}</a>
           ))}
         </div>
 
@@ -189,18 +194,19 @@ function Hero() {
             >
               Iniciar sesión  <ArrowRight size={17} />
             </a>
-            <button style={{
+            <a href="#como-funciona" style={{
               background: 'transparent', color: '#fff',
               border: '1px solid rgba(255,255,255,0.2)',
               borderRadius: 8, padding: '0.85rem 2rem',
               fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '0.95rem',
-              cursor: 'pointer', transition: 'all 0.2s',
+              cursor: 'pointer', textDecoration: 'none', display: 'inline-block',
+              transition: 'all 0.2s',
             }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.5)'; e.currentTarget.style.background = 'rgba(255,255,255,0.05)' }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; e.currentTarget.style.background = 'transparent' }}
             >
               Ver más
-            </button>
+            </a>
           </div>
 
           {/* Trust indicators */}
@@ -365,9 +371,9 @@ function Features() {
   ]
 
   return (
-    <section ref={ref} style={{
-      background: 'var(--gray-100)', padding: '6rem 2rem',
-    }}>
+<section id="caracteristicas" ref={ref} style={{
+  background: 'var(--gray-100)', padding: '6rem 2rem',
+}}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div style={{
           textAlign: 'center', marginBottom: '4rem',
@@ -460,9 +466,9 @@ function HowItWorks() {
   ]
 
   return (
-    <section ref={ref} style={{
-      background: 'var(--navy)', padding: '6rem 2rem', position: 'relative', overflow: 'hidden',
-    }}>
+<section id="como-funciona" ref={ref} style={{
+  background: 'var(--navy)', padding: '6rem 2rem', position: 'relative', overflow: 'hidden',
+}}>
       <div style={{
         position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)',
         width: '60%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(232,70,10,0.4), transparent)',
@@ -535,6 +541,94 @@ function HowItWorks() {
               }}>{s.desc}</p>
             </div>
           ))}
+          {/* Videos About-The-Product y About-The-Team */}
+        <div style={{
+          marginTop: '5rem',
+          opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(32px)',
+          transition: 'all 0.7s ease 0.3s',
+        }}>
+          <h3 style={{
+            fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.3rem',
+            textAlign: 'center', marginBottom: '2.5rem', letterSpacing: '-0.01em',
+          }}>
+            Conoce RiskGuard en acción
+          </h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 28 }}>
+            {[
+              { title: 'Sobre el producto', url: 'https://youtu.be/ZD5rg0QELU0', desc: 'Conoce cómo RiskGuard transforma la gestión de seguridad industrial.' },
+              { title: 'Sobre el equipo', url: 'https://youtu.be/ZGSDDErFNhs', desc: 'El proceso detrás del desarrollo de RiskGuard, contado por el equipo.' },
+            ].map(v => (
+              <a key={v.title} href={v.url} target="_blank" rel="noopener noreferrer" style={{
+                textDecoration: 'none', display: 'block',
+                background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 16, padding: '1.5rem', transition: 'all 0.2s',
+              }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'rgba(232,70,10,0.3)' }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}
+              >
+                <div style={{
+                  width: '100%', aspectRatio: '16/9', borderRadius: 10,
+                  background: 'linear-gradient(135deg, var(--navy-3), var(--navy-2))',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  marginBottom: '1rem', position: 'relative', overflow: 'hidden',
+                }}>
+                  <div style={{
+                    width: 56, height: 56, borderRadius: '50%',
+                    background: 'var(--accent)', display: 'flex', alignItems: 'center',
+                    justifyContent: 'center', boxShadow: '0 8px 24px rgba(232,70,10,0.4)',
+                  }}>
+                    <div style={{
+                      width: 0, height: 0, borderTop: '10px solid transparent',
+                      borderBottom: '10px solid transparent', borderLeft: '16px solid #fff',
+                      marginLeft: 3,
+                    }} />
+                  </div>
+                </div>
+                <h4 style={{
+                  fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem',
+                  color: '#fff', marginBottom: 6,
+                }}>{v.title}</h4>
+                <p style={{
+                  color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', fontFamily: 'var(--font-body)',
+                  fontWeight: 300, lineHeight: 1.6,
+                }}>{v.desc}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Capturas del Frontend */}
+        <div style={{
+          marginTop: '4rem',
+          opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(32px)',
+          transition: 'all 0.7s ease 0.4s',
+        }}>
+          <h3 style={{
+            fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.3rem',
+            textAlign: 'center', marginBottom: '2.5rem', letterSpacing: '-0.01em',
+          }}>
+            Así se ve RiskGuard en operación
+          </h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 28 }}>
+            {[
+              { img: '/assets/captura1.png', title: 'Panel de monitoreo en tiempo real' },
+              { img: '/assets/captura1.png', title: 'Registro de inspecciones y activos' },
+            ].map(s => (
+              <div key={s.title} style={{
+                background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 16, padding: '1rem', overflow: 'hidden',
+              }}>
+                <img src={s.img} alt={s.title} style={{
+                  width: '100%', borderRadius: 10, display: 'block', marginBottom: '0.75rem',
+                }} />
+                <p style={{
+                  color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', fontFamily: 'var(--font-body)',
+                  fontWeight: 400, textAlign: 'center',
+                }}>{s.title}</p>
+              </div>
+            ))}
+          </div>
+        </div>
         </div>
       </div>
     </section>
@@ -552,10 +646,10 @@ function Stats() {
   ]
 
   return (
-    <section ref={ref} style={{
-      background: 'linear-gradient(135deg, var(--navy-3) 0%, var(--navy-2) 100%)',
-      padding: '5rem 2rem', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)',
-    }}>
+<section id="estadisticas" ref={ref} style={{
+  background: 'linear-gradient(135deg, var(--navy-3) 0%, var(--navy-2) 100%)',
+  padding: '5rem 2rem', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)',
+}}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div style={{
           textAlign: 'center', marginBottom: '3.5rem',
@@ -626,7 +720,7 @@ function Segments() {
   ]
 
   return (
-    <section ref={ref} style={{ background: 'var(--gray-100)', padding: '6rem 2rem' }}>
+    <section id="segmentos" ref={ref} style={{ background: 'var(--gray-100)', padding: '6rem 2rem' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div style={{
           textAlign: 'center', marginBottom: '4rem',
@@ -731,30 +825,32 @@ function CTA() {
           su cultura de seguridad con RiskGuard. Implementación en menos de un día hábil.
         </p>
         <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <button style={{
+          <a href="https://riskguard-a146d.web.app/login" style={{
             background: 'var(--accent)', color: '#fff', border: 'none',
             borderRadius: 10, padding: '1rem 2.5rem',
             fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem',
             cursor: 'pointer', boxShadow: '0 8px 32px rgba(232,70,10,0.4)',
+            textDecoration: 'none',
             transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: 8,
           }}
             onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(232,70,10,0.55)' }}
             onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(232,70,10,0.4)' }}
           >
             Iniciar prueba gratuita <ArrowRight size={17} />
-          </button>
-          <button style={{
+          </a>
+          <a href="mailto:contacto@riskguard.pe" style={{
             background: 'transparent', color: 'rgba(255,255,255,0.8)',
             border: '1px solid rgba(255,255,255,0.2)',
             borderRadius: 10, padding: '1rem 2.5rem',
             fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '1rem',
-            cursor: 'pointer', transition: 'all 0.2s',
+            cursor: 'pointer', textDecoration: 'none', display: 'inline-block',
+            transition: 'all 0.2s',
           }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.5)'; e.currentTarget.style.background = 'rgba(255,255,255,0.05)' }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; e.currentTarget.style.background = 'transparent' }}
           >
             Hablar con ventas
-          </button>
+          </a>
         </div>
       </div>
     </section>
