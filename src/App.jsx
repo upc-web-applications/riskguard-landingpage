@@ -500,13 +500,6 @@ function HowItWorks() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 32, position: 'relative' }}>
-          {/* Connector line */}
-          <div style={{
-            position: 'absolute', top: 52, left: '16%', right: '16%', height: 1,
-            background: 'linear-gradient(90deg, transparent, rgba(232,70,10,0.3), rgba(232,70,10,0.3), transparent)',
-            display: 'none',
-          }} />
-
           {steps.map((s, i) => (
             <div key={s.num} style={{
               opacity: visible ? 1 : 0,
@@ -541,7 +534,9 @@ function HowItWorks() {
               }}>{s.desc}</p>
             </div>
           ))}
-          {/* Videos About-The-Product y About-The-Team */}
+        </div>
+
+        {/* ── Videos embebidos ── */}
         <div style={{
           marginTop: '5rem',
           opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(32px)',
@@ -555,34 +550,27 @@ function HowItWorks() {
           </h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 28 }}>
             {[
-              { title: 'Sobre el producto', url: 'https://youtu.be/ZD5rg0QELU0', desc: 'Conoce cómo RiskGuard transforma la gestión de seguridad industrial.' },
-              { title: 'Sobre el equipo', url: 'https://youtu.be/ZGSDDErFNhs', desc: 'El proceso detrás del desarrollo de RiskGuard, contado por el equipo.' },
+              { title: 'Sobre el producto', id: 'ZD5rg0QELU0', desc: 'Conoce cómo RiskGuard transforma la gestión de seguridad industrial.' },
+              { title: 'Sobre el equipo', id: 'ZGSDDErFNhs', desc: 'El proceso detrás del desarrollo de RiskGuard, contado por el equipo.' },
             ].map(v => (
-              <a key={v.title} href={v.url} target="_blank" rel="noopener noreferrer" style={{
-                textDecoration: 'none', display: 'block',
+              <div key={v.title} style={{
                 background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
-                borderRadius: 16, padding: '1.5rem', transition: 'all 0.2s',
-              }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'rgba(232,70,10,0.3)' }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}
-              >
+                borderRadius: 16, padding: '1.5rem',
+              }}>
                 <div style={{
                   width: '100%', aspectRatio: '16/9', borderRadius: 10,
-                  background: 'linear-gradient(135deg, var(--navy-3), var(--navy-2))',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  marginBottom: '1rem', position: 'relative', overflow: 'hidden',
+                  overflow: 'hidden', marginBottom: '1rem',
                 }}>
-                  <div style={{
-                    width: 56, height: 56, borderRadius: '50%',
-                    background: 'var(--accent)', display: 'flex', alignItems: 'center',
-                    justifyContent: 'center', boxShadow: '0 8px 24px rgba(232,70,10,0.4)',
-                  }}>
-                    <div style={{
-                      width: 0, height: 0, borderTop: '10px solid transparent',
-                      borderBottom: '10px solid transparent', borderLeft: '16px solid #fff',
-                      marginLeft: 3,
-                    }} />
-                  </div>
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={`https://www.youtube.com/embed/${v.id}`}
+                    title={v.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ display: 'block', border: 'none', borderRadius: 10 }}
+                  />
                 </div>
                 <h4 style={{
                   fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem',
@@ -592,12 +580,12 @@ function HowItWorks() {
                   color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', fontFamily: 'var(--font-body)',
                   fontWeight: 300, lineHeight: 1.6,
                 }}>{v.desc}</p>
-              </a>
+              </div>
             ))}
           </div>
         </div>
 
-        {/* Capturas del Frontend */}
+        {/* ── Capturas del Frontend ── */}
         <div style={{
           marginTop: '4rem',
           opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(32px)',
@@ -611,8 +599,8 @@ function HowItWorks() {
           </h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 28 }}>
             {[
-              { img: 'assets/captura1.png', title: 'Panel de monitoreo en tiempo real' },
-              { img: 'assets/captura2.png', title: 'Registro de inspecciones y activos' },
+              { img: '/assets/captura1.png', title: 'Panel de monitoreo en tiempo real' },
+              { img: '/assets/captura2.png', title: 'Registro de inspecciones y activos' },
             ].map(s => (
               <div key={s.title} style={{
                 background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
@@ -629,7 +617,7 @@ function HowItWorks() {
             ))}
           </div>
         </div>
-        </div>
+
       </div>
     </section>
   )
