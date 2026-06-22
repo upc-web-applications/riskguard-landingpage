@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-import captura1 from '../assets/captura1.png'
-import captura2 from '../assets/captura2.png'
+import captura1 from './assets/captura1.png'
+import captura2 from './assets/captura2.png'
 import {
-  Shield, Bell, FileText, ChevronRight, Menu, X,
+  Shield, Bell, FileText, ChevronRight,
   AlertTriangle, BarChart3, Users, ArrowRight,
-  CheckCircle, Zap, Lock, TrendingUp, Factory,
-  HardHat, ClipboardList, Phone, Mail, MapPin,
-  ChevronDown, Star, Award, Target
+  CheckCircle, Lock, HardHat, ClipboardList,
+  ChevronDown, Target
 } from 'lucide-react'
 
 /* ─── Hook: intersection observer para reveal on scroll ─── */
@@ -26,7 +25,6 @@ function useReveal() {
 
 /* ─── Navbar ─── */
 function Navbar() {
-  const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40)
@@ -446,6 +444,8 @@ function Features() {
 /* ─── How It Works ─── */
 function HowItWorks() {
   const [ref, visible] = useReveal()
+  const [videoIndex, setVideoIndex] = useState(0)
+  const [imageIndex, setImageIndex] = useState(0)
   const steps = [
     {
       num: '01',
@@ -538,7 +538,7 @@ function HowItWorks() {
           ))}
         </div>
 
-        {/* ── Videos embebidos ── */}
+        {/* ── Videos carrusel ── */}
         <div style={{
           marginTop: '5rem',
           opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(32px)',
@@ -546,18 +546,22 @@ function HowItWorks() {
         }}>
           <h3 style={{
             fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.3rem',
-            textAlign: 'center', marginBottom: '2.5rem', letterSpacing: '-0.01em',
+            textAlign: 'center', marginBottom: '1.5rem', letterSpacing: '-0.01em',
           }}>
             Conoce RiskGuard en acción
           </h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 28 }}>
+          <div style={{
+            maxWidth: 640, margin: '0 auto',
+            background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: 16, padding: '1.5rem', position: 'relative', overflow: 'hidden',
+          }}>
             {[
               { title: 'Sobre el producto', id: 'ZD5rg0QELU0', desc: 'Conoce cómo RiskGuard transforma la gestión de seguridad industrial.' },
               { title: 'Sobre el equipo', id: 'ZGSDDErFNhs', desc: 'El proceso detrás del desarrollo de RiskGuard, contado por el equipo.' },
-            ].map(v => (
+            ].map((v, i) => (
               <div key={v.title} style={{
-                background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
-                borderRadius: 16, padding: '1.5rem',
+                display: i === videoIndex ? 'block' : 'none',
+                animation: i === videoIndex ? 'fadeIn 0.4s ease' : 'none',
               }}>
                 <div style={{
                   width: '100%', aspectRatio: '16/9', borderRadius: 10,
@@ -569,7 +573,7 @@ function HowItWorks() {
                     src={`https://www.youtube.com/embed/${v.id}`}
                     title={v.title}
                     frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     style={{ display: 'block', border: 'none', borderRadius: 10 }}
                   />
@@ -584,6 +588,19 @@ function HowItWorks() {
                 }}>{v.desc}</p>
               </div>
             ))}
+            {/* Dots */}
+            <div style={{
+              display: 'flex', justifyContent: 'center', gap: 10, marginTop: '1rem',
+            }}>
+              {['Sobre el producto', 'Sobre el equipo'].map((_, i) => (
+                <button key={i} onClick={() => setVideoIndex(i)} style={{
+                  width: 10, height: 10, borderRadius: '50%', border: 'none', cursor: 'pointer',
+                  padding: 0, transition: 'all 0.3s ease',
+                  background: i === videoIndex ? 'var(--accent)' : 'rgba(255,255,255,0.25)',
+                  transform: i === videoIndex ? 'scale(1.3)' : 'scale(1)',
+                }} aria-label={`Ver ${i === 0 ? 'Sobre el producto' : 'Sobre el equipo'}`} />
+              ))}
+            </div>
           </div>
         </div>
 
@@ -595,18 +612,22 @@ function HowItWorks() {
         }}>
           <h3 style={{
             fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.3rem',
-            textAlign: 'center', marginBottom: '2.5rem', letterSpacing: '-0.01em',
+            textAlign: 'center', marginBottom: '1.5rem', letterSpacing: '-0.01em',
           }}>
             Así se ve RiskGuard en operación
           </h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 28 }}>
+          <div style={{
+            maxWidth: 640, margin: '0 auto',
+            background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: 16, padding: '1rem', overflow: 'hidden',
+          }}>
             {[
-                { img: captura1, title: 'Panel de monitoreo en tiempo real' },
-                { img: captura2, title: 'Registro de inspecciones y activos' },
-            ].map(s => (
+              { img: captura1, title: 'Panel de monitoreo en tiempo real' },
+              { img: captura2, title: 'Registro de inspecciones y activos' },
+            ].map((s, i) => (
               <div key={s.title} style={{
-                background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
-                borderRadius: 16, padding: '1rem', overflow: 'hidden',
+                display: i === imageIndex ? 'block' : 'none',
+                animation: i === imageIndex ? 'fadeIn 0.4s ease' : 'none',
               }}>
                 <img src={s.img} alt={s.title} style={{
                   width: '100%', borderRadius: 10, display: 'block', marginBottom: '0.75rem',
@@ -617,6 +638,19 @@ function HowItWorks() {
                 }}>{s.title}</p>
               </div>
             ))}
+            {/* Dots */}
+            <div style={{
+              display: 'flex', justifyContent: 'center', gap: 10, marginTop: '0.5rem',
+            }}>
+              {['Panel de monitoreo', 'Registro de inspecciones'].map((_, i) => (
+                <button key={i} onClick={() => setImageIndex(i)} style={{
+                  width: 10, height: 10, borderRadius: '50%', border: 'none', cursor: 'pointer',
+                  padding: 0, transition: 'all 0.3s ease',
+                  background: i === imageIndex ? 'var(--accent)' : 'rgba(255,255,255,0.25)',
+                  transform: i === imageIndex ? 'scale(1.3)' : 'scale(1)',
+                }} aria-label={`Ver ${i === 0 ? 'Panel de monitoreo' : 'Registro de inspecciones'}`} />
+              ))}
+            </div>
           </div>
         </div>
 
@@ -828,7 +862,7 @@ function CTA() {
           >
             Iniciar prueba gratuita <ArrowRight size={17} />
           </a>
-          <a href="mailto:contacto@riskguard.pe" style={{
+          <a href="https://riskguard-a146d.web.app/login" style={{
             background: 'transparent', color: 'rgba(255,255,255,0.8)',
             border: '1px solid rgba(255,255,255,0.2)',
             borderRadius: 10, padding: '1rem 2.5rem',
@@ -839,7 +873,7 @@ function CTA() {
             onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.5)'; e.currentTarget.style.background = 'rgba(255,255,255,0.05)' }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; e.currentTarget.style.background = 'transparent' }}
           >
-            Hablar con ventas
+            Iniciar sesión <ArrowRight size={17} />
           </a>
         </div>
       </div>
