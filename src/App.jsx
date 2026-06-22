@@ -611,8 +611,8 @@ function HowItWorks() {
           </h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 28 }}>
             {[
-              { img: '/assets/captura1.png', title: 'Panel de monitoreo en tiempo real' },
-              { img: '/assets/captura2.png', title: 'Registro de inspecciones y activos' },
+              { img: 'assets/captura1.png', title: 'Panel de monitoreo en tiempo real' },
+              { img: 'assets/captura2.png', title: 'Registro de inspecciones y activos' },
             ].map(s => (
               <div key={s.title} style={{
                 background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
